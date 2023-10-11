@@ -11,7 +11,7 @@ public static class Bravery
     [PublicAPI]
     public struct Config
     {
-        [MaxPower] public float Power;
+        [MultiplicativePercentagePower] public float Power;
     }
 
     [HarmonyPatch(typeof(SEMan), nameof(SEMan.ApplyStatusEffectSpeedMods))]
@@ -27,7 +27,7 @@ public static class Bravery
 
 
             var BraveryEffect = Player.m_localPlayer.GetEffectPower<Config>(bravery);
-            speed += BraveryEffect.Power / 100f;
+            speed += BraveryEffect.Power / 100 * baseSpeed;
         }
     }
 
